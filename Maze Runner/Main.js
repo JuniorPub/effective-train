@@ -23,7 +23,7 @@ function validate() {
     var password=document.getElementById("password").value;
     
     if(username=="informatik" && password == "1234") {
-    alert("login succesfully");
+    alert("login succesfully"); 
 }
     else {
     alert("faill to login")
