@@ -18,16 +18,19 @@ function calc() {
 }
 
 
-function validate() {
-    var username=document.getElementById("username").value;
-    var password=document.getElementById("password").value;
-    
-    if(username=="informatik" && password == "1234") {
-    alert("login succesfully"); 
-}
-    else {
-    alert("faill to login")
-}
-}
+function login() {
+    var brugernavn = document.querySelector("#brugernavn").value;
+    var password = document.querySelector("#password").value;
 
-
+    if(brugernavn == "penis" && password == "vagina"){
+        document.querySelector("#fejl").innerHTML ="Login succesfuld"
+    }else if(brugernavn == "" && password == ""){
+        document.querySelector("#fejl").innerHTML = "Indtast både brugernavn og kodeord"
+    }else if(brugernavn == "penis" && password == ""){
+        document.querySelector("#fejl").innerHTML = "Indtast dit password"
+    }else if(brugernavn == "" && password == "vagina"){
+        document.querySelector("#fejl").innerHTML = "Indtast dit brugernavn"
+    }else {
+        document.querySelector("#fejl").innerHTML = "Både brugernavn og adgangskode er forkert" 
+    }
+}
