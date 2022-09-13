@@ -9,9 +9,10 @@
 <body>
    <nav>
         <ul>
-            <li> <a href="Home.html">Home</a></li>
-            <li> <a href="Lommeregner.html">Lommeregner</a></li>
-            <li> <a href="loginsystem.html">Login</a></li>
+            <li> <a href="index.php">Home</a></li>
+            <li> <a href="Lommeregner.php">Lommeregner</a></li>
+            <li> <a href="signup.php">Sign Up</a></li>
+            <li> <a href="loginsystem.php">Login</a></li>
 
         </ul>
    </nav>

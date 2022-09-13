@@ -10,8 +10,9 @@
 <body>
    <nav>
         <ul>
-            <li> <a href="Home.html">Home</a></li>
+            <li> <a href="home.html">Home</a></li>
             <li> <a href="Lommeregner.html">Lommeregner</a></li>
+            <li> <a href="signup.html">Sign Up</a></li>
             <li> <a href="loginsystem.html">Login</a></li>
 
         </ul>
