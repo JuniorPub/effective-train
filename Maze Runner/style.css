@@ -12,16 +12,17 @@ body {
 }
 
 .box {
-text-align: center;
-margin-left: auto;
-margin-right: auto;
-width: 300px;
-padding: 80px;
-
-transform: translate(0%,50%);
-background: gray;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  padding: 80px;
+  transform: translate(0%,50%);
+  background: gray;
 
 }
+
+
 
 .box h1 {
     text-align: center;
