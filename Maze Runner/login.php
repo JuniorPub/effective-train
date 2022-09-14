@@ -2,7 +2,7 @@
     include_once 'header.php';
 ?>
 
-    <form class="box">
+    <form class="box" action="login.inc.php" method="post">
         <h1>
         login
         </h1>
