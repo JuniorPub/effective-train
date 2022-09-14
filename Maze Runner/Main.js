@@ -34,3 +34,5 @@ function login() {
       document.querySelector("#fejl").innerHTML = "Både brugernavn og adgangskode er forkert" 
   }
 }
+
+
