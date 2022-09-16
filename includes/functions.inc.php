@@ -1,6 +1,6 @@
 <?php
 
-// Check for empty input signup
+// Her tjekkere vi, om der er et tomt input til sign up. Hvis 
 function emptyInputSignup($username, $pwd, $pwdRepeat) {
 	$result;
 	if (empty($username) || empty($pwd) || empty($pwdRepeat)) {
@@ -12,7 +12,7 @@ function emptyInputSignup($username, $pwd, $pwdRepeat) {
 	return $result;
 }
 
-// Check invalid username
+// Her tjekkere vi så for ugyldigt brugernavn
 function invalidUid($username) {
 	$result;
 	if (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
@@ -26,7 +26,7 @@ function invalidUid($username) {
 
 
 
-// Check if passwords matches
+// Her tjekkere vi om begge koder man skriver er ens 
 function pwdMatch($pwd, $pwdrepeat) {
 	$result;
 	if ($pwd !== $pwdrepeat) {
@@ -38,7 +38,7 @@ function pwdMatch($pwd, $pwdrepeat) {
 	return $result;
 }
 
-// Check if username is in database, if so then return data
+// Her tjekkere vi om ens username er i vores database
 function uidExists($conn, $username) {
   $sql = "SELECT * FROM users WHERE usersUid = ?;";
 	$stmt = mysqli_stmt_init($conn);
@@ -50,7 +50,7 @@ function uidExists($conn, $username) {
 	mysqli_stmt_bind_param($stmt, "ss", $username, $username);
 	mysqli_stmt_execute($stmt);
 
-	// "Get result" returns the results from a prepared statement
+	
 	$resultData = mysqli_stmt_get_result($stmt);
 
 	if ($row = mysqli_fetch_assoc($resultData)) {
@@ -64,7 +64,7 @@ function uidExists($conn, $username) {
 	mysqli_stmt_close($stmt);
 }
 
-// Insert new user into database
+// Den her kode hjælper os med at tilføje personer til vores databse
 function createUser($conn, $username, $pwd) {
   $sql = "INSERT INTO users (usersUid, usersPwd) VALUES (?, ?);";
 
@@ -84,7 +84,7 @@ function createUser($conn, $username, $pwd) {
 	exit();
 }
 
-// Check for empty input login
+// Her tjekker vi, for om der er et tomt input felt i selve login delen. 
 function emptyInputLogin($username, $pwd) {
 	$result;
 	if (empty($username) || empty($pwd)) {
@@ -96,7 +96,7 @@ function emptyInputLogin($username, $pwd) {
 	return $result;
 }
 
-// Log user into website
+// Hvis alt går rigtig og man skriver den rigtig brugernavn og password. Så hjælpe den her med logge in ind på siden. 
 function loginUser($conn, $username, $pwd) {
 	$uidExists = uidExists($conn, $username);
 

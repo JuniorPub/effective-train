@@ -22,16 +22,16 @@
                     echo "<p>Udfyld alle fælter!</p>";
                 }
                 else if ($_GET["error"] == "invaliduid") {
-                    echo "<p>Choose a proper Brugernavn!</p>";
+                    echo "<p>Vælge et bedre Brugernavn!</p>";
                 }
                 else if ($_GET["error"] == "passwordsdontmatch") {
-                    echo "<p>Passwords doesn't match!</p>";
+                    echo "<p>Passwords matcher ikke!</p>";
                 }
                 else if ($_GET["error"] == "stmtfailed") {
-                    echo "<p>Something went wrong, try again!</p>";
+                    echo "<p>Noget gik galt, prøv igen!</p>";
                 }
                 else if ($_GET["error"] == "usernametaken") {
-                    echo "<p>username already taken!</p>";
+                    echo "<p>username allerede taget!</p>";
                 }
                 else if ($_GET["error"] == "none") {
                     echo "<p>You have signed up!</p>";

@@ -16,13 +16,13 @@
         </div>
 
         <?php
-                // Error besked
+                // Error besked hvis man ikke udfylde felterne. 
             if (isset($_GET["error"])) {
                 if ($_GET["error"] == "emptyinput") {
-                echo "<p>Fill in all fields!</p>";
+                echo "<p>Udfyld alle fælter!</p>";
                 }
                 else if ($_GET["error"] == "wronglogin") {
-                echo "<p>Wrong login!</p>";
+                echo "<p>Forkert login!</p>";
                 }
             }
         ?>
