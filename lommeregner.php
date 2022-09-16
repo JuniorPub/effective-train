@@ -28,6 +28,6 @@
         <div id="results"></div>
 
         
-</body>
-    <script src="Main.js"></script>
-</html>
+<?php 
+    include_once 'footer.php';
+?>

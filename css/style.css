@@ -7,9 +7,16 @@ body {
   background-color: #eee;
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-size: 115%;
+  font-family: system-ui, sans-serif;
 }
+p {
+  font-family: system-ui, sans-serif;
 
+  text-align: center;
+  transform: translate(0%, 66%);
+  color: rgb(159, 198, 211);
+}
 .box {
   text-align: center;
   margin-left: auto;
