@@ -13,7 +13,7 @@ function emptyInputSignup($brugernavn, $pwd, $pwdRepeat) {
 
 function invalidUid($brugernavn) {
     $result;
-    if (!preg_match("/^[a-zA-Z0-9]*$/", $brugernavn)) {
+    if (!preg_match("/^[a-zA-Z0-9]*$/", $brugernavn) {
         $result = true;
     }
     else {
@@ -33,15 +33,15 @@ function pwdMatch($pwd, $pwdRepeat) {
     return $result;
 }
 
-function uidExites ($conn, $brugernavn) {
-    $sql = "SELECT * FROM users WHERE usersUid = ?;";
+function uidExists ($conn, $brugernavn) {
+    $sql = "SELECT * FROM `login` WHERE brugernavn = ?;";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../signup.php?error=brugernavntaken");
         exit();
     }
 
-    mysqli_stmt_bind_param($stmt, "s", $brugernavn);
+    mysqli_stmt_bind_param($stmt, "ss", $brugernavn);
     mysqli_stmt_execute($stmt);
 
     $resultData = mysqli_stmt_result($stmt);
@@ -59,7 +59,7 @@ mysqli_stmt_close($stmt);
 }
 
 function createUser($conn, $brugernavn, $pwd); {
-    $sql = "INSERT INTO users (brugernavn, password) VALUES (?, ?);";
+    $sql = "INSERT INTO `login` (brugernavn, `password`) VALUES (?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if (!mysqli_stmt_prepare($stmt, $sql)) {
         header("location: ../signup.php?error=brugernavntaken");

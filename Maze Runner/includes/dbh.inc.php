@@ -1,14 +1,14 @@
 <?php
 
 
-$serverName = "localhost";
+$serverName = "localhost:8080";
 $dBBrugernavn = "root";
 $dBPassword = "";
-$dbNavn = "loginsystem";
+$dbName = "phpproject01";
 
-$conn = mysqli_connect($serverName, $dBBrugernavn,$dBPassword, $dbNavn);
+$conn = mysqli_connect($serverName, $dBBrugernavn,$dBPassword, $dbName);
 
-if (!conn){
-    die("Connection: " . mysqli_connect_error());
+if (!$conn){
+    die("Connection failed: " . mysqli_connect_error());
 }
 
