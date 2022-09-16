@@ -89,6 +89,7 @@ ul li a:active {
 }
 
 input[type="text"],
+input[type="password"],
 select {
   width: 50%;
   padding: 12px 20px;
@@ -99,7 +100,8 @@ select {
   box-sizing: border-box;
 }
 
-button[type="button"] {
+button[type="submit"],
+[type="button"] {
   width: 50%;
   background-color: #4caf50;
   color: white;
@@ -110,7 +112,8 @@ button[type="button"] {
   cursor: pointer;
 }
 
-button[type="button"]:hover {
+button[type="submit"],
+[type="button"]:hover {
   background-color: #45a049;
 }
 
