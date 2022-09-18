@@ -3,8 +3,8 @@
 if (isset($_POST["submit"])) {
 
   
-  $username = $_POST["uid"];
-  $pwd = $_POST["pwd"];
+  $brugernavn = $_POST["brugernavn"];
+  $password = $_POST["password"];
 
   
 
@@ -12,13 +12,13 @@ if (isset($_POST["submit"])) {
   require_once 'functions.inc.php';
 
 
-  if (emptyInputLogin($username, $pwd) === true) {
+  if (emptyInputLogin($brugernavn, $password) === true) {
     header("location: ../login.php?error=emptyinput");
 		exit();
   }
 
  
-  loginUser($conn, $username, $pwd);
+  loginUser($conn, $brugernavn, $password);
 
 } else {
 	header("location: ../login.php");

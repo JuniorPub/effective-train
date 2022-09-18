@@ -1,44 +1,40 @@
 <?php
 
 if (isset($_POST["submit"])) {
-
   
-  $username = $_POST["uid"];
-  $pwd = $_POST["pwd"];
-  $pwdRepeat = $_POST["pwdrepeat"];
+  $brugernavn = $_POST["brugernavn"];
+  $password = $_POST["password"];
+  $passwordrepeat = $_POST["passwordrepeat"];
 
   // Herefter kommer der forskellige kode med fejl funktioner for at fange alle brugerfejl. som om man har glemt password eller glemt udfylde alle felter
   // Disse funktioner kan findes i functions.inc.php
 
-  require_once "dbh.inc.php";
+  require_once 'dbh.inc.php';
   require_once 'functions.inc.php';
 
-  
-  if (emptyInputSignup($username, $pwd, $pwdRepeat) !== false) {
-    header("location: ../signup.php?error=emptyinput");
-		exit();
-  }
-	
-  if (invalidUid($uid) !== false) {
-    header("location: ../signup.php?error=invaliduid");
-		exit();
+  if(tommeFelter($brugernavn, $password, $passwordrepeat) !== false) {
+  header("location: ../signup.php?error=tommefelter");
+  exit();
   }
 
- 
-  if (pwdMatch($pwd, $pwdRepeat) !== false) {
-    header("location: ../signup.php?error=passwordsdontmatch");
-		exit();
-  }
-  
-  if (uidExists($conn, $username) !== false) {
-    header("location: ../signup.php?error=usernametaken");
-		exit();
+  if(forkertBrugernavn($brugernavn) !== false) {
+  header("location: ../signup.php?error=forkertbrugernavn");
+  exit();
   }
 
-  
-  createUser($conn, $username, $pwd);
+  if(pwdMatch($password, $passwordrepeat) !== false) {
+  header("location: ../signup.php?error=pwdmatch");
+  exit();
+  }
 
-} else {
-	header("location: ../signup.php");
-    exit();
+  if(brugernavnOptaget($conn, $brugernavn) !== false) {
+  header("location: ../signup.php?error=brugernavnoptaget");
+  exit();
+  }
+
+  opretBruger($conn, $brugernavn, $password);
+
+}
+else {
+  header("location: ../signup.php");
 }

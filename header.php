@@ -21,7 +21,7 @@
         <li><a href="index.php">Home</a></li>
         <li><a href="lommeregner.php">Lommeregner</a></li>
         <?php
-            if (isset($_SESSION["useruid"])) {
+            if (isset($_SESSION["brugernavn"])) {
               echo "<li><a href='profile.php'>profilside</a></li>";
               echo "<li><a href='logout.php'>Logout</a></li>";
             }

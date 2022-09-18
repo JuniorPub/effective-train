@@ -1,122 +1,118 @@
 <?php
 
 // Her tjekkere vi, om der er et tomt input til sign up. Hvis 
-function emptyInputSignup($username, $pwd, $pwdRepeat) {
-	$result;
-	if (empty($username) || empty($pwd) || empty($pwdRepeat)) {
-		$result = true;
-	}
-	else {
-		$result = false;
-	}
-	return $result;
-}
 
+function tommeFelter($brugernavn, $password, $passwordrepeat) {
+    $result;
+    if(empty($brugernavn) || empty($password) || empty($passwordrepeat)) {
+        $result = true;
+    }
+    else {
+        $result = false;
+    }
+    return $result;
+}
 // Her tjekkere vi så for ugyldigt brugernavn
-function invalidUid($username) {
-	$result;
-	if (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
-		$result = true;
-	}
-	else {
-		$result = false;
-	}
-	return $result;
+
+function forkertBrugernavn($brugernavn) {
+    $result;
+    if(!preg_match("/^[a-zA-Z0-9]*$/", $brugernavn)) {
+        $result = true;
+    }
+    else {
+        $result = false;
+    }
+    return $result;
 }
-
-
-
 // Her tjekkere vi om begge koder man skriver er ens 
-function pwdMatch($pwd, $pwdrepeat) {
-	$result;
-	if ($pwd !== $pwdrepeat) {
-		$result = true;
-	}
-	else {
-		$result = false;
-	}
-	return $result;
+
+function pwdMatch($password, $passwordrepeat) {
+    $result;
+    if($password !== $passwordrepeat) {
+        $result = true;
+    }
+    else {
+        $result = false;
+    }
+    return $result;
 }
+// Her tjekkere vi om ens brugernavn er i vores database
 
-// Her tjekkere vi om ens username er i vores database
-function uidExists($conn, $username) {
-  $sql = "SELECT * FROM users WHERE usersUid = ?;";
-	$stmt = mysqli_stmt_init($conn);
-	if (!mysqli_stmt_prepare($stmt, $sql)) {
-	 	header("location: ../signup.php?error=stmtfailed");
-		exit();
-	}
+function brugernavnOptaget($conn, $brugernavn) {
+    $sql = "SELECT * FROM login WHERE brugernavn = ?;";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../signup.php?error=stmtfailed");
+        exit();
+    }
 
-	mysqli_stmt_bind_param($stmt, "ss", $username, $username);
-	mysqli_stmt_execute($stmt);
+    mysqli_stmt_bind_param($stmt, "s", $brugernavn);
+    mysqli_stmt_execute($stmt);
 
-	
-	$resultData = mysqli_stmt_get_result($stmt);
+    $resultData = mysqli_stmt_get_result($stmt);
 
-	if ($row = mysqli_fetch_assoc($resultData)) {
-		return $row;
-	}
-	else {
-		$result = false;
-		return $result;
-	}
+    if($row = mysqli_fetch_assoc($resultData)) {
+        return $row;
+    }
+    else {
+        $result = false;
+        return $result;
+    }
 
-	mysqli_stmt_close($stmt);
+    mysqli_stmt_close($stmt);
 }
-
 // Den her kode hjælper os med at tilføje personer til vores databse
-function createUser($conn, $username, $pwd) {
-  $sql = "INSERT INTO users (usersUid, usersPwd) VALUES (?, ?);";
 
-	$stmt = mysqli_stmt_init($conn);
-	if (!mysqli_stmt_prepare($stmt, $sql)) {
-	 	header("location: ../signup.php?error=stmtfailed");
-		exit();
-	}
+function opretBruger($conn, $brugernavn, $password) {
+    $sql = "INSERT INTO login (brugernavn, password) VALUES (?, ?);";
+    $stmt = mysqli_stmt_init($conn);
+    if(!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../signup.php?error=stmtfailed");
+        exit();
+    }
 
-	$hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-	mysqli_stmt_bind_param($stmt, "ss", $username, $hashedPwd);
-	mysqli_stmt_execute($stmt);
-	mysqli_stmt_close($stmt);
-	mysqli_close($conn);
-	header("location: ../signup.php?error=none");
-	exit();
+    mysqli_stmt_bind_param($stmt, "ss", $brugernavn, $hashedPassword);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    header("location: ../signup.php?error=none");
+        exit();
 }
 
-// Her tjekker vi, for om der er et tomt input felt i selve login delen. 
-function emptyInputLogin($username, $pwd) {
-	$result;
-	if (empty($username) || empty($pwd)) {
-		$result = true;
-	}
-	else {
-		$result = false;
-	}
-	return $result;
-}
+// // Her tjekker vi, for om der er et tomt input felt i selve login delen. 
+// function emptyInputLogin($brugernavn, $password) {
+// 	$result;
+// 	if (empty($brugernavn) || empty(password)) {
+// 		$result = true;
+// 	}
+// 	else {
+// 		$result = false;
+// 	}
+// 	return $result;
+// }
 
-// Hvis alt går rigtig og man skriver den rigtig brugernavn og password. Så hjælpe den her med logge in ind på siden. 
-function loginUser($conn, $username, $pwd) {
-	$uidExists = uidExists($conn, $username);
+// // Hvis alt går rigtig og man skriver den rigtig brugernavn og password. Så hjælpe den her med logge in ind på siden. 
+// function loginUser($conn, $brugernavn, $password) {
+// 	$uidExists = uidExists($conn, $brugernavn);
 
-	if ($uidExists === false) {
-		header("location: ../login.php?error=wronglogin");
-		exit();
-	}
+// 	if ($uidExists === false) {
+// 		header("location: ../login.php?error=wronglogin");
+// 		exit();
+// 	}
 
-	$pwdHashed = $uidExists["usersPwd"];
-	$checkPwd = password_verify($pwd, $pwdHashed);
+// 	$passwordHashed = $uidExists["brugernavnpassword"];
+// 	$checkpassword = password_verify($password, $passwordHashed);
 
-	if ($checkPwd === false) {
-		header("location: ../login.php?error=wronglogin");
-		exit();
-	}
-	elseif ($checkPwd === true) {
-		session_start();
-		$_SESSION["userid"] = $uidExists["usersId"];
-		$_SESSION["useruid"] = $uidExists["usersUid"];
-		header("location: ../index.php?error=none");
-		exit();
-	}
-}
+// 	if ($checkpassword === false) {
+// 		header("location: ../login.php?error=wronglogin");
+// 		exit();
+// 	}
+// 	elseif ($checkpassword === true) {
+// 		session_start();
+// 		$_SESSION["userid"] = $uidExists["usersId"];
+// 		$_SESSION["useruid"] = $uidExists["usersUid"];
+// 		header("location: ../index.php?error=none");
+// 		exit();
+// 	}
+// }
